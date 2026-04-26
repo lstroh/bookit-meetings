@@ -1,0 +1,14 @@
+{
+  "name": "bookit-meetings-dev",
+  "private": true,
+  "scripts": {
+    "wp-env:start": "wp-env start",
+    "wp-env:stop": "wp-env stop",
+    "wp-env:destroy": "wp-env destroy",
+    "test": "wp-env run tests-cli --env-cwd=wp-content/plugins/bookit-meetings vendor/bin/phpunit"
+  },
+  "devDependencies": {
+    "@wordpress/env": "^10.0.0"
+  }
+}
+

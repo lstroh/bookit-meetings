@@ -1,0 +1,1 @@
+{"version":1,"defects":[],"times":{"Test_Bookit_Meetings_Registration::test_plugin_constants_are_defined":1.727,"Test_Bookit_Meetings_Registration::test_extension_is_registered_with_core":0.037,"Test_Bookit_Meetings_Registration::test_loader_class_exists":0.029,"Test_Bookit_Meetings_Registration::test_nav_item_registered":0.474}}

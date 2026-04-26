@@ -1,0 +1,33 @@
+# Dependencies
+vendor/
+node_modules/
+dashboard/node_modules/
+
+# Built assets
+dashboard/dist/
+tests/e2e/node_modules/
+
+# Core zip (developer downloads this locally — not committed)
+bookit-booking-system.zip
+
+# Environment
+.env
+.env.local
+tests/e2e/.env.test.local
+tests/e2e/.env.test.live
+
+# IDE
+.vscode/
+.idea/
+.cursor/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# wp-env runtime
+.wp-env/
+
