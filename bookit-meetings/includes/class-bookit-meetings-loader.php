@@ -31,6 +31,10 @@ class Bookit_Meetings_Loader {
 		}
 
 		// ── Migrations (Task 2) ──────────────────────────────────────────────
+		bookit_register_migration_path(
+			'bookit-meetings',
+			BOOKIT_MEETINGS_PLUGIN_DIR . 'database/migrations/'
+		);
 		// ── REST API (Task 3) ────────────────────────────────────────────────
 		// ── Link generation (Task 4) ─────────────────────────────────────────
 		// ── Customer surfaces (Task 5) ───────────────────────────────────────

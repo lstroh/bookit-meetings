@@ -30,7 +30,11 @@ function bookit_meetings_activate(): void {
 		return;
 	}
 
-	// TODO Sprint 1 Task 2: run migrations
+	bookit_register_migration_path(
+		'bookit-meetings',
+		BOOKIT_MEETINGS_PLUGIN_DIR . 'database/migrations/'
+	);
+	Bookit_Migration_Runner::run_pending( 'bookit-meetings' );
 }
 
 /**
@@ -43,7 +47,11 @@ function bookit_meetings_deactivate(): void {
 		return;
 	}
 
-	// TODO Sprint 1 Task 2: rollback migrations
+	bookit_register_migration_path(
+		'bookit-meetings',
+		BOOKIT_MEETINGS_PLUGIN_DIR . 'database/migrations/'
+	);
+	Bookit_Migration_Runner::rollback_last( 'bookit-meetings' );
 }
 
 register_activation_hook( __FILE__, 'bookit_meetings_activate' );

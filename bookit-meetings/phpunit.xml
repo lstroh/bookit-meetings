@@ -3,6 +3,7 @@
     <testsuites>
         <testsuite name="unit">
             <directory suffix=".php">tests/unit</directory>
+            <file>tests/unit/test-migrations.php</file>
         </testsuite>
     </testsuites>
 </phpunit>
