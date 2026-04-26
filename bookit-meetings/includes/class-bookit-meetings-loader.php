@@ -39,6 +39,10 @@ class Bookit_Meetings_Loader {
 		require_once BOOKIT_MEETINGS_PLUGIN_DIR . 'api/class-meetings-api.php';
 		add_action( 'rest_api_init', array( new Bookit_Meetings_Api(), 'register_routes' ) );
 		// ── Link generation (Task 4) ─────────────────────────────────────────
+		require_once BOOKIT_MEETINGS_PLUGIN_DIR . 'includes/class-bookit-meetings-link-generator.php';
+		$link_generator = new Bookit_Meetings_Link_Generator();
+		add_action( 'bookit_after_booking_confirmed', array( $link_generator, 'handle_booking_confirmed' ), 10, 2 );
+		add_action( 'bookit_after_booking_created', array( $link_generator, 'handle_booking_created' ), 10, 2 );
 		// ── Customer surfaces (Task 5) ───────────────────────────────────────
 		// ── Staff notification email (Task 6) ─────────────────────────────────
 	}
