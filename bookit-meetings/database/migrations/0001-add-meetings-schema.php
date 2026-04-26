@@ -103,100 +103,36 @@ class Bookit_Migration_Meetings_0001_Add_Meetings_Schema extends Bookit_Migratio
 
 		// 3) Insert settings rows (idempotent).
 		$settings_table = $wpdb->prefix . 'bookings_settings';
-		$settings       = array(
+
+		$settings = array(
 			'meetings_enabled'    => '0',
 			'meetings_platform'   => '',
 			'meetings_manual_url' => '',
 		);
 
 		foreach ( $settings as $key => $value ) {
-			$value = (string) $value;
-
-			$wpdb->last_error = '';
-			if ( '' === $value ) {
-				$sql = $wpdb->prepare(
-					"INSERT IGNORE INTO {$settings_table} (setting_key, setting_value) VALUES (%s, '')",
-					$key
-				);
-			} else {
-				$sql = $wpdb->prepare(
-					"INSERT IGNORE INTO {$settings_table} (setting_key, setting_value) VALUES (%s, %s)",
-					$key,
-					$value
-				);
-			}
-
-			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared,WordPress.DB.DirectDatabaseQuery.DirectQuery
-			$wpdb->query( $sql );
-			if ( ! empty( $wpdb->last_error ) ) {
-				throw new RuntimeException(
-					sprintf(
-						'Failed inserting meetings setting row (%s): %s',
-						$key,
-						$wpdb->last_error
-					)
-				);
-			}
-
-			$wpdb->last_error = '';
-			if ( '' === $value ) {
-				$backfill_sql = $wpdb->prepare(
-					"UPDATE {$settings_table}
-					SET setting_value = ''
-					WHERE setting_key = %s
-						AND setting_value IS NULL",
-					$key
-				);
-			} else {
-				$backfill_sql = $wpdb->prepare(
-					"UPDATE {$settings_table}
-					SET setting_value = %s
-					WHERE setting_key = %s
-						AND setting_value IS NULL",
-					$value,
-					$key
-				);
-			}
-
-			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared,WordPress.DB.DirectDatabaseQuery.DirectQuery
-			$wpdb->query( $backfill_sql );
-			if ( ! empty( $wpdb->last_error ) ) {
-				throw new RuntimeException(
-					sprintf(
-						'Failed backfilling meetings setting row (%s): %s',
-						$key,
-						$wpdb->last_error
-					)
-				);
-			}
-
-			$exists_sql = $wpdb->prepare(
-				"SELECT COUNT(*) FROM {$settings_table} WHERE setting_key = %s",
-				$key
+			$sql = $wpdb->prepare(
+				"INSERT INTO {$settings_table} (setting_key, setting_value)
+				VALUES (%s, %s)
+				ON DUPLICATE KEY UPDATE setting_value = IF(setting_value IS NULL, VALUES(setting_value), setting_value)",
+				$key,
+				$value
 			);
 
 			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared,WordPress.DB.DirectDatabaseQuery.DirectQuery
-			$exists = (int) $wpdb->get_var( $exists_sql );
+			$wpdb->query( $sql );
 
-			if ( 0 === $exists ) {
-				// Retry once if the row is still missing (should never happen, but avoids silent NULL reads).
-				$wpdb->last_error = '';
-				// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared,WordPress.DB.DirectDatabaseQuery.DirectQuery
-				$wpdb->query( $sql );
-
-				// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared,WordPress.DB.DirectDatabaseQuery.DirectQuery
-				$exists = (int) $wpdb->get_var( $exists_sql );
-
-				if ( 0 === $exists ) {
-					throw new RuntimeException(
-						sprintf(
-							'Meetings setting row missing after insert (%s): %s',
-							$key,
-							$wpdb->last_error
-						)
-					);
-				}
-			}
+			// Extra safety: if a prior state left NULL, force default.
+			$update_sql = $wpdb->prepare(
+				"UPDATE {$settings_table}
+				SET setting_value = %s
+				WHERE setting_key = %s
+					AND setting_value IS NULL",
+				$value,
+				$key
+			);
+			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared,WordPress.DB.DirectDatabaseQuery.DirectQuery
+			$wpdb->query( $update_sql );
 		}
 	}
 

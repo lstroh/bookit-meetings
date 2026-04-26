@@ -25,3 +25,19 @@ tests_add_filter( 'muplugins_loaded', '_manually_load_plugins' );
 
 require $_tests_dir . '/includes/bootstrap.php';
 
+// Ensure core Bookit tables exist for WP test prefix.
+if ( function_exists( 'bookit_activate' ) ) {
+	global $wpdb;
+	$settings_table = $wpdb->prefix . 'bookings_settings';
+	$exists         = $wpdb->get_var(
+		$wpdb->prepare(
+			'SHOW TABLES LIKE %s',
+			$settings_table
+		)
+	);
+
+	if ( $exists !== $settings_table ) {
+		bookit_activate();
+	}
+}
+
