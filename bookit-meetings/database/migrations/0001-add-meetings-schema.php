@@ -110,29 +110,78 @@ class Bookit_Migration_Meetings_0001_Add_Meetings_Schema extends Bookit_Migratio
 			'meetings_manual_url' => '',
 		);
 
-		foreach ( $settings as $key => $value ) {
-			$sql = $wpdb->prepare(
-				"INSERT INTO {$settings_table} (setting_key, setting_value)
-				VALUES (%s, %s)
-				ON DUPLICATE KEY UPDATE setting_value = IF(setting_value IS NULL, VALUES(setting_value), setting_value)",
-				$key,
-				$value
+		foreach ( $settings as $key => $default_value ) {
+			$existing_id = $wpdb->get_var(
+				$wpdb->prepare(
+					"SELECT id FROM {$settings_table} WHERE setting_key = %s LIMIT 1",
+					$key
+				)
 			);
 
-			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared,WordPress.DB.DirectDatabaseQuery.DirectQuery
-			$wpdb->query( $sql );
+			if ( null === $existing_id ) {
+				$wpdb->insert(
+					$settings_table,
+					array(
+						'setting_key'   => $key,
+						'setting_value' => $default_value,
+					),
+					array( '%s', '%s' )
+				);
 
-			// Extra safety: if a prior state left NULL, force default.
-			$update_sql = $wpdb->prepare(
-				"UPDATE {$settings_table}
-				SET setting_value = %s
-				WHERE setting_key = %s
-					AND setting_value IS NULL",
-				$value,
-				$key
+				$inserted_value = $wpdb->get_var(
+					$wpdb->prepare(
+						"SELECT setting_value FROM {$settings_table} WHERE setting_key = %s LIMIT 1",
+						$key
+					)
+				);
+
+				if ( null === $inserted_value ) {
+					if ( '' === $default_value ) {
+						$update_sql = $wpdb->prepare(
+							"UPDATE {$settings_table} SET setting_value = '' WHERE setting_key = %s AND setting_value IS NULL",
+							$key
+						);
+						// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared,WordPress.DB.DirectDatabaseQuery.DirectQuery
+						$wpdb->query( $update_sql );
+					} else {
+						$wpdb->update(
+							$settings_table,
+							array( 'setting_value' => $default_value ),
+							array( 'setting_key' => $key ),
+							array( '%s' ),
+							array( '%s' )
+						);
+					}
+				}
+
+				continue;
+			}
+
+			$current_value = $wpdb->get_var(
+				$wpdb->prepare(
+					"SELECT setting_value FROM {$settings_table} WHERE setting_key = %s LIMIT 1",
+					$key
+				)
 			);
-			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared,WordPress.DB.DirectDatabaseQuery.DirectQuery
-			$wpdb->query( $update_sql );
+
+			if ( null === $current_value ) {
+				if ( '' === $default_value ) {
+					$update_sql = $wpdb->prepare(
+						"UPDATE {$settings_table} SET setting_value = '' WHERE setting_key = %s AND setting_value IS NULL",
+						$key
+					);
+					// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared,WordPress.DB.DirectDatabaseQuery.DirectQuery
+					$wpdb->query( $update_sql );
+				} else {
+					$wpdb->update(
+						$settings_table,
+						array( 'setting_value' => $default_value ),
+						array( 'setting_key' => $key ),
+						array( '%s' ),
+						array( '%s' )
+					);
+				}
+			}
 		}
 	}
 

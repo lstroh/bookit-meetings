@@ -36,6 +36,8 @@ class Bookit_Meetings_Loader {
 			BOOKIT_MEETINGS_PLUGIN_DIR . 'database/migrations/'
 		);
 		// ── REST API (Task 3) ────────────────────────────────────────────────
+		require_once BOOKIT_MEETINGS_PLUGIN_DIR . 'api/class-meetings-api.php';
+		add_action( 'rest_api_init', array( new Bookit_Meetings_Api(), 'register_routes' ) );
 		// ── Link generation (Task 4) ─────────────────────────────────────────
 		// ── Customer surfaces (Task 5) ───────────────────────────────────────
 		// ── Staff notification email (Task 6) ─────────────────────────────────

@@ -61,9 +61,8 @@ class Test_Bookit_Meetings_Migrations extends WP_UnitTestCase {
 		require_once BOOKIT_MEETINGS_PLUGIN_DIR . 'database/migrations/0001-add-meetings-schema.php';
 
 		$this->migration = new Bookit_Migration_Meetings_0001_Add_Meetings_Schema();
-
-		$this->ensure_meetings_schema_exists();
 		bookit_test_truncate_tables( array( 'bookings_settings' ) );
+		$this->ensure_meetings_schema_exists();
 	}
 
 	public function tearDown(): void {
@@ -136,15 +135,19 @@ class Test_Bookit_Meetings_Migrations extends WP_UnitTestCase {
 		global $wpdb;
 
 		$table_name = $wpdb->prefix . 'bookings_settings';
-		$sql        = $wpdb->prepare(
-			"SELECT COALESCE(setting_value, '') FROM {$table_name} WHERE setting_key = %s LIMIT 1",
+		$sql = $wpdb->prepare(
+			"SELECT setting_value FROM {$table_name} WHERE setting_key = %s LIMIT 1",
 			$setting_key
 		);
 
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.PreparedSQL.NotPrepared
-		$value = $wpdb->get_var( $sql );
+		$results = $wpdb->get_col( $sql );
 
-		return null === $value ? null : (string) $value;
+		if ( empty( $results ) ) {
+			return null;
+		}
+
+		return (string) $results[0];
 	}
 
 	private function count_setting_key( string $setting_key ): int {
