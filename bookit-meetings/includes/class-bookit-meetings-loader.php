@@ -44,6 +44,10 @@ class Bookit_Meetings_Loader {
 		add_action( 'bookit_after_booking_confirmed', array( $link_generator, 'handle_booking_confirmed' ), 10, 2 );
 		add_action( 'bookit_after_booking_created', array( $link_generator, 'handle_booking_created' ), 10, 2 );
 		// ── Customer surfaces (Task 5) ───────────────────────────────────────
+		require_once BOOKIT_MEETINGS_PLUGIN_DIR . 'includes/class-bookit-meetings-customer-surfaces.php';
+		$customer_surfaces = new Bookit_Meetings_Customer_Surfaces();
+		add_filter( 'bookit_confirmation_meeting_section', array( $customer_surfaces, 'confirmation_page_section' ), 10, 2 );
+		add_filter( 'bookit_email_meeting_section', array( $customer_surfaces, 'confirmation_email_section' ), 10, 2 );
 		// ── Staff notification email (Task 6) ─────────────────────────────────
 	}
 }
