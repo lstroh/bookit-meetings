@@ -34,7 +34,19 @@ class Bookit_Meetings_Customer_Surfaces {
 			return '<div class="bookit-meeting-section bookit-meeting-whatsapp"><p>Your host will initiate a WhatsApp call/video at your appointment time.</p></div>';
 		}
 
-		$meeting_link = $booking['meeting_link'] ?? null;
+		$booking_id = isset( $booking['id'] ) ? (int) $booking['id'] : 0;
+		if ( $booking_id <= 0 ) {
+			return $html;
+		}
+
+		global $wpdb;
+		$results = $wpdb->get_col( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.PreparedSQL.NotPrepared
+			$wpdb->prepare(
+				"SELECT meeting_link FROM {$wpdb->prefix}bookings WHERE id = %d LIMIT 1",
+				$booking_id
+			)
+		);
+		$meeting_link = empty( $results ) ? null : $results[0];
 		if ( null === $meeting_link || '' === (string) $meeting_link ) {
 			return $html;
 		}
@@ -69,7 +81,19 @@ class Bookit_Meetings_Customer_Surfaces {
 			return '<tr><td style="padding: 12px 0; font-family: Arial, sans-serif; font-size: 14px; color: #333333;">Your host will initiate a WhatsApp call/video at your appointment time.</td></tr>';
 		}
 
-		$meeting_link = $booking['meeting_link'] ?? null;
+		$booking_id = isset( $booking['id'] ) ? (int) $booking['id'] : 0;
+		if ( $booking_id <= 0 ) {
+			return $html;
+		}
+
+		global $wpdb;
+		$results = $wpdb->get_col( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.PreparedSQL.NotPrepared
+			$wpdb->prepare(
+				"SELECT meeting_link FROM {$wpdb->prefix}bookings WHERE id = %d LIMIT 1",
+				$booking_id
+			)
+		);
+		$meeting_link = empty( $results ) ? null : $results[0];
 		if ( null === $meeting_link || '' === (string) $meeting_link ) {
 			return $html;
 		}

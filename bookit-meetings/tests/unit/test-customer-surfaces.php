@@ -75,10 +75,45 @@ class Test_Bookit_Meetings_Customer_Surfaces extends WP_UnitTestCase {
 		}
 	}
 
+	private function insert_test_booking( array $overrides = array() ): int {
+		global $wpdb;
+
+		$defaults = array(
+			'customer_id'      => 1,
+			'staff_id'         => 1,
+			'service_id'       => 1,
+			'booking_date'     => current_time( 'Y-m-d' ),
+			'start_time'       => '10:00:00',
+			'end_time'         => '11:00:00',
+			'duration'         => 60,
+			'status'           => 'confirmed',
+			'total_price'      => 0.00,
+			'deposit_paid'     => 0.00,
+			'balance_due'      => 0.00,
+			'full_amount_paid' => 0,
+			'payment_method'   => 'pay_on_arrival',
+			'created_at'       => current_time( 'mysql' ),
+			'updated_at'       => current_time( 'mysql' ),
+			'meeting_link'     => null,
+			'deleted_at'       => null,
+		);
+
+		$data = wp_parse_args( $overrides, $defaults );
+
+		$wpdb->insert( $wpdb->prefix . 'bookings', $data );
+		return (int) $wpdb->insert_id;
+	}
+
 	private function make_booking( string $meeting_link = null ): array {
+		$id = $this->insert_test_booking(
+			array(
+				'meeting_link' => $meeting_link,
+			)
+		);
+
 		return array(
-			'id'           => 1,
-			'meeting_link' => $meeting_link,
+			'id'           => $id,
+			'meeting_link' => null,
 			'status'       => 'confirmed',
 		);
 	}
