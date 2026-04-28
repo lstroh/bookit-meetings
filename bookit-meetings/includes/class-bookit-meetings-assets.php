@@ -18,56 +18,51 @@ class Bookit_Meetings_Assets {
 	 * @return void
 	 */
 	public function enqueue_dashboard_assets(): void {
-		$assets_dir = BOOKIT_MEETINGS_PLUGIN_DIR . 'dashboard/dist/assets/';
+		$js_path  = BOOKIT_MEETINGS_PLUGIN_DIR . 'dashboard/dist/app.js';
+		$css_path = BOOKIT_MEETINGS_PLUGIN_DIR . 'dashboard/dist/app.css';
 
-		$js_files  = glob( $assets_dir . '*.js' ) ?: array();
-		$css_files = glob( $assets_dir . '*.css' ) ?: array();
-
-		if ( empty( $js_files ) && empty( $css_files ) ) {
+		if ( ! file_exists( $js_path ) ) {
 			if ( class_exists( 'Bookit_Logger' ) ) {
 				Bookit_Logger::warning(
 					'Bookit Meetings dashboard assets not found. Did you run the Vite build?',
 					array(
-						'path' => $assets_dir,
+						'path' => $js_path,
 					)
 				);
 			}
 			return;
 		}
 
-		sort( $js_files );
-		sort( $css_files );
-
-		$plugin_file = BOOKIT_MEETINGS_PLUGIN_DIR . 'bookit-meetings.php';
-		$base_url    = plugin_dir_url( $plugin_file );
-
-		if ( ! empty( $css_files ) ) {
-			$css_file = basename( (string) $css_files[0] );
+		if ( file_exists( $css_path ) ) {
 			wp_enqueue_style(
 				'bookit-meetings-dashboard',
-				$base_url . 'dashboard/dist/assets/' . $css_file,
+				BOOKIT_MEETINGS_PLUGIN_URL . 'dashboard/dist/app.css',
 				array(),
 				BOOKIT_MEETINGS_VERSION
 			);
 		}
 
-		if ( ! empty( $js_files ) ) {
-			$js_file = basename( (string) $js_files[0] );
-			wp_enqueue_script(
-				'bookit-meetings-dashboard',
-				$base_url . 'dashboard/dist/assets/' . $js_file,
-				array(),
-				BOOKIT_MEETINGS_VERSION,
-				true
-			);
+		wp_enqueue_script(
+			'bookit-meetings-dashboard',
+			BOOKIT_MEETINGS_PLUGIN_URL . 'dashboard/dist/app.js',
+			array(),
+			BOOKIT_MEETINGS_VERSION,
+			true
+		);
 
-			$data = apply_filters( 'bookit_dashboard_js_data', array() );
-			if ( ! is_array( $data ) ) {
-				$data = array();
-			}
-
-			wp_localize_script( 'bookit-meetings-dashboard', 'bookitMeetings', $data );
+		$data = apply_filters( 'bookit_dashboard_js_data', array() );
+		if ( ! is_array( $data ) ) {
+			$data = array();
 		}
+
+		wp_localize_script( 'bookit-meetings-dashboard', 'bookitMeetings', $data );
+
+		add_action(
+			'wp_footer',
+			function () {
+				echo '<div id="bookit-meetings-app"></div>';
+			}
+		);
 	}
 
 	/**
