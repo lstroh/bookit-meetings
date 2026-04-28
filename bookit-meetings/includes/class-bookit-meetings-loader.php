@@ -35,6 +35,14 @@ class Bookit_Meetings_Loader {
 			'bookit-meetings',
 			BOOKIT_MEETINGS_PLUGIN_DIR . 'database/migrations/'
 		);
+
+		// ── Dashboard assets + JS data + booking response (Sprint 2, Task 1) ──
+		require_once BOOKIT_MEETINGS_PLUGIN_DIR . 'includes/class-bookit-meetings-assets.php';
+		$assets = new Bookit_Meetings_Assets();
+		add_action( 'bookit_dashboard_loaded', array( $assets, 'enqueue_dashboard_assets' ) );
+		add_filter( 'bookit_dashboard_js_data', array( $assets, 'add_dashboard_js_data' ) );
+		add_filter( 'bookit_booking_response', array( $assets, 'add_meeting_link_to_booking_response' ), 10, 2 );
+
 		// ── REST API (Task 3) ────────────────────────────────────────────────
 		require_once BOOKIT_MEETINGS_PLUGIN_DIR . 'api/class-meetings-api.php';
 		add_action( 'rest_api_init', array( new Bookit_Meetings_Api(), 'register_routes' ) );
