@@ -124,7 +124,7 @@ class Test_Bookit_Meetings_Backend_Wiring extends WP_UnitTestCase {
 		$response = apply_filters(
 			'bookit_booking_response',
 			array( 'id' => $booking_id ),
-			array( 'id' => $booking_id ) // meeting_link intentionally absent (stale booking array).
+			$booking_id
 		);
 
 		$this->assertIsArray( $response );
@@ -141,7 +141,7 @@ class Test_Bookit_Meetings_Backend_Wiring extends WP_UnitTestCase {
 		$response = apply_filters(
 			'bookit_booking_response',
 			array( 'id' => $booking_id ),
-			array( 'id' => $booking_id )
+			$booking_id
 		);
 
 		$this->assertSame( '', $response['meeting_link'] );

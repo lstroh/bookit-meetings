@@ -93,13 +93,12 @@ class Bookit_Meetings_Assets {
 	 * Extend booking response with meeting_link (re-read from DB).
 	 *
 	 * @param array $response Response payload.
-	 * @param array $booking Booking array (may be stale).
+	 * @param int   $booking_id Booking ID.
 	 * @return array
 	 */
-	public function add_meeting_link_to_booking_response( array $response, array $booking ): array {
+	public function add_meeting_link_to_booking_response( array $response, int $booking_id ): array {
 		global $wpdb;
 
-		$booking_id = isset( $booking['id'] ) ? (int) $booking['id'] : 0;
 		if ( $booking_id <= 0 ) {
 			$response['meeting_link'] = '';
 			return $response;
