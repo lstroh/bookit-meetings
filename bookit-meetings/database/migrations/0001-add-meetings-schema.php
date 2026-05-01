@@ -217,7 +217,20 @@ class Bookit_Migration_Meetings_0001_Add_Meetings_Schema extends Bookit_Migratio
 		// 3) Drop meeting_link column.
 		$bookings_table = $wpdb->prefix . 'bookings';
 		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared,WordPress.DB.DirectDatabaseQuery.DirectQuery
-		$wpdb->query( "ALTER TABLE {$bookings_table} DROP COLUMN IF EXISTS meeting_link" );
+		$column_exists = $wpdb->get_col(
+			$wpdb->prepare(
+				"SELECT COLUMN_NAME FROM information_schema.COLUMNS
+				WHERE TABLE_SCHEMA = %s AND TABLE_NAME = %s AND COLUMN_NAME = %s",
+				DB_NAME,
+				$bookings_table,
+				'meeting_link'
+			)
+		);
+
+		if ( ! empty( $column_exists ) ) {
+			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared,WordPress.DB.DirectDatabaseQuery.DirectQuery
+			$wpdb->query( "ALTER TABLE {$bookings_table} DROP COLUMN meeting_link" );
+		}
 	}
 }
 

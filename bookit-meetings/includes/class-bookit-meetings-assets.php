@@ -42,25 +42,31 @@ class Bookit_Meetings_Assets {
 			);
 		}
 
-		wp_enqueue_script(
-			'bookit-meetings-dashboard',
-			BOOKIT_MEETINGS_PLUGIN_URL . 'dashboard/dist/app.js',
-			array(),
-			BOOKIT_MEETINGS_VERSION,
-			true
-		);
+		$js_url = BOOKIT_MEETINGS_PLUGIN_URL . 'dashboard/dist/app.js';
 
-		$data = apply_filters( 'bookit_dashboard_js_data', array() );
-		if ( ! is_array( $data ) ) {
-			$data = array();
+		static $started = false;
+		if ( $started ) {
+			return;
 		}
+		$started = true;
 
-		wp_localize_script( 'bookit-meetings-dashboard', 'bookitMeetings', $data );
+		ob_start(
+			function ( string $html ) use ( $js_url ): string {
+				$data = apply_filters( 'bookit_dashboard_js_data', array() );
+				if ( ! is_array( $data ) ) {
+					$data = array();
+				}
 
-		add_action(
-			'wp_footer',
-			function () {
-				echo '<div id="bookit-meetings-app"></div>';
+				$json = wp_json_encode( $data );
+				if ( false === $json ) {
+					$json = '{}';
+				}
+
+				$inject  = '<script>window.bookitMeetings = ' . $json . ';</script>' . "\n";
+				$inject .= '<script type="module" src="' . esc_url( $js_url ) . '"></script>' . "\n";
+				$inject .= '<div id="bookit-meetings-app"></div>' . "\n";
+
+				return str_replace( '</body>', $inject . '</body>', $html );
 			}
 		);
 	}
