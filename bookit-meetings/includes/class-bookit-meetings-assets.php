@@ -52,6 +52,13 @@ class Bookit_Meetings_Assets {
 
 		ob_start(
 			function ( string $html ) use ( $js_url ): string {
+				$current_path      = $_SERVER['REQUEST_URI'] ?? '';
+				$is_meetings_route = str_contains( $current_path, '/bookit-dashboard/app/meetings' );
+
+				if ( ! $is_meetings_route ) {
+					return $html;
+				}
+
 				$data = apply_filters( 'bookit_dashboard_js_data', array() );
 				if ( ! is_array( $data ) ) {
 					$data = array();
