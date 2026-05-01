@@ -1,14 +1,17 @@
+<script setup>
+import { RouterView } from 'vue-router'
+</script>
+
 <template>
-	<div class="bm-app">
-		<h1>Bookit Meetings</h1>
-	</div>
+  <div class="bm-app">
+    <RouterView />
+  </div>
 </template>
 
 <style scoped>
 .bm-app {
-	color: var(--bookit-text-primary);
-	padding: 24px;
+  padding: 24px;
+  color: var(--bookit-text-primary);
 }
-
 </style>
 
