@@ -28,7 +28,7 @@ class Bookit_Migration_Meetings_0001_Add_Meetings_Schema extends Bookit_Migratio
 	 * @return string
 	 */
 	public function migration_id(): string {
-		return 'meetings-0001-add-meetings-schema';
+		return '0001-add-meetings-schema';
 	}
 
 	/**
@@ -233,9 +233,3 @@ class Bookit_Migration_Meetings_0001_Add_Meetings_Schema extends Bookit_Migratio
 		}
 	}
 }
-
-// Keep migration runner compatibility (expects class name derived from filename).
-if ( ! class_exists( 'Bookit_Migration_0001_Add_Meetings_Schema' ) ) {
-	class_alias( 'Bookit_Migration_Meetings_0001_Add_Meetings_Schema', 'Bookit_Migration_0001_Add_Meetings_Schema' );
-}
-
