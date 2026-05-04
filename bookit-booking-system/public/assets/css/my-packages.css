@@ -1,0 +1,237 @@
+/* My Packages page styles */
+
+.bookit-my-packages {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
+.bookit-my-packages__title {
+    margin: 0 0 16px;
+    color: var(--bookit-text-primary);
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.bookit-my-packages__intro {
+    margin: 0 0 20px;
+    color: #4b5563;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.bookit-my-packages__email-form,
+.bookit-my-packages__empty {
+    background: var(--bookit-bg-card);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 24px;
+}
+
+.bookit-email-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.bookit-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.bookit-form-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+}
+
+.bookit-form-input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #d1d5db;
+    border-radius: var(--bookit-border-radius);
+    color: var(--bookit-text-primary);
+    font-size: 16px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.bookit-form-input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+}
+
+.bookit-package-card {
+    background: var(--bookit-bg-card);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 16px;
+    overflow: hidden;
+}
+
+.bookit-package-card__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 18px 20px;
+    border-bottom: 1px solid var(--bookit-border);
+}
+
+.bookit-package-card__name {
+    color: var(--bookit-text-primary);
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.bookit-package-status {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    padding: 4px 10px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.bookit-package-status--active {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.bookit-package-card__body {
+    padding: 16px 20px 12px;
+}
+
+.bookit-package-card__sessions {
+    color: var(--bookit-text-primary);
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.bookit-package-card__expiry {
+    color: var(--bookit-text-secondary);
+    font-size: 14px;
+}
+
+.bookit-package-card__footer {
+    padding: 0 20px 16px;
+}
+
+.bookit-toggle-history {
+    appearance: none;
+    border: none;
+    background: transparent;
+    color: #667eea;
+    padding: 0;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.bookit-toggle-history:hover,
+.bookit-toggle-history:focus {
+    color: #5568d3;
+}
+
+.bookit-redemption-history {
+    border-top: 1px solid var(--bookit-border);
+    background: var(--bookit-bg-page);
+    padding: 12px 20px 18px;
+}
+
+.bookit-redemption-history__loading,
+.bookit-redemption-history__empty {
+    margin: 0;
+    color: var(--bookit-text-secondary);
+    font-size: 14px;
+}
+
+.bookit-redemption-history__error {
+    margin: 0;
+    color: #dc2626;
+    font-size: 14px;
+}
+
+.bookit-redemption-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.bookit-redemption-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--bookit-border);
+}
+
+.bookit-redemption-item:last-child {
+    border-bottom: none;
+}
+
+.bookit-redemption-item__date {
+    color: var(--bookit-text-secondary);
+    font-size: 13px;
+    flex: 0 0 170px;
+}
+
+.bookit-redemption-item__service {
+    color: var(--bookit-text-primary);
+    font-weight: 500;
+    flex: 1 1 auto;
+}
+
+.bookit-redemption-item__staff {
+    color: var(--bookit-text-secondary);
+    text-align: right;
+    flex: 0 0 150px;
+}
+
+.bookit-my-packages .bookit-btn-primary {
+    background: #667eea;
+    color: var(--bookit-text-inverse);
+    border: none;
+    border-radius: var(--bookit-border-radius);
+    padding: 12px 20px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.bookit-my-packages .bookit-btn-primary:hover {
+    background: #5568d3;
+}
+
+@media (max-width: 768px) {
+    .bookit-my-packages {
+        margin: 20px auto;
+        padding: 10px;
+    }
+
+    .bookit-my-packages__title {
+        font-size: 24px;
+    }
+
+    .bookit-package-card__header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .bookit-redemption-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+
+    .bookit-redemption-item__date,
+    .bookit-redemption-item__staff {
+        flex: 1 1 auto;
+        text-align: left;
+    }
+}

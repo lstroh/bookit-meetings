@@ -1,0 +1,25 @@
+---
+description: Core plugin folder is read-only reference for the agent
+alwaysApply: true
+---
+
+# `bookit-booking-system/` is reference-only
+
+Treat `bookit-booking-system/` as a **read-only reference** copy of the core BookIt plugin (for discovery, types, APIs, and integration behavior).
+
+## Do not modify
+
+Unless the user **explicitly** asks you to change the core plugin in the same message (e.g. “edit `bookit-booking-system/...`” or “fix a bug in the booking system plugin”), you must **not**:
+
+- Edit, create, delete, or move files under `bookit-booking-system/`
+- Run refactors, formatting-only sweeps, or “drive-by” fixes there
+- Add dependencies or change `composer.json` / `package.json` in that tree
+
+## Allowed
+
+- Read, search, cite, and explain code under `bookit-booking-system/` for context
+- Describe how `bookit-meetings` should hook into or mirror core behavior
+
+## Where changes go
+
+Default all implementation work to **`bookit-meetings/`** (and other explicitly in-scope paths). If something requires a core change, **say so** and wait for explicit approval to touch `bookit-booking-system/`.

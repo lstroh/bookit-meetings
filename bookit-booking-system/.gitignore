@@ -1,0 +1,32 @@
+# Dependencies
+vendor/
+node_modules/
+dashboard/node_modules/
+
+# Built assets
+dashboard/dist/
+
+# Environment
+.env
+.env.local
+
+# wp-env runtime (local)
+.wp-env/
+
+# IDE
+.vscode/
+.idea/
+.cursor/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# PHPUnit / coverage
+.phpunit.result.cache
+coverage/
+
+# Playwright e2e: tests/e2e/.gitignore (env, reports, node_modules)

@@ -1,0 +1,371 @@
+/**
+ * Booking confirmation page V2 — scoped under .bookit-confirmation-page
+ *
+ * @package Bookit_Booking_System
+ */
+
+.bookit-confirmation-page {
+  max-width: 680px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 2rem 1rem 3rem;
+  font-family: var(--bookit-font-family);
+  color: var(--bookit-text-primary);
+  background: var(--bookit-bg-page);
+}
+
+.bookit-confirmation-page .bookit-confirmed-layout {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ── Success header ── */
+.bookit-confirmation-page .bookit-confirmed-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 2rem 1.5rem 1.5rem;
+  background: var(--bookit-bg-card);
+  border-radius: 14px;
+  border: 1px solid var(--bookit-border);
+}
+
+.bookit-confirmation-page .bookit-confirmed-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--bookit-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+  flex-shrink: 0;
+}
+
+.bookit-confirmation-page .bookit-confirmed-icon svg {
+  display: block;
+}
+
+.bookit-confirmation-page .bookit-confirmed-heading {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--bookit-text-primary);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin: 0 0 8px;
+}
+
+.bookit-confirmation-page .bookit-confirmed-email {
+  font-size: 0.875rem;
+  color: var(--bookit-text-secondary);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.bookit-confirmation-page .bookit-confirmed-email strong {
+  color: var(--bookit-text-primary);
+  font-weight: 500;
+}
+
+/* ── Cards ── */
+.bookit-confirmation-page .bookit-confirmed-card {
+  background: var(--bookit-bg-card);
+  border: 1px solid var(--bookit-border);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.bookit-confirmation-page .bookit-confirmed-card-inner {
+  padding: 1.25rem 1.5rem;
+}
+
+/* ── Detail rows ── */
+.bookit-confirmation-page .bookit-confirmed-detail-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.bookit-confirmation-page .bookit-confirmed-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--bookit-border);
+}
+
+.bookit-confirmation-page .bookit-confirmed-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.bookit-confirmation-page .bookit-confirmed-row:first-child {
+  padding-top: 0;
+}
+
+.bookit-confirmation-page .bookit-confirmed-label {
+  font-size: 0.8125rem;
+  color: var(--bookit-text-secondary);
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.bookit-confirmation-page .bookit-confirmed-value {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--bookit-text-primary);
+  text-align: right;
+  min-width: 0;
+  word-break: break-word;
+}
+
+.bookit-confirmation-page .bookit-confirmed-ref {
+  color: var(--bookit-primary);
+  font-weight: 500;
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Payment rows ── */
+.bookit-confirmation-page .bookit-confirmed-payment-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 12px;
+}
+
+.bookit-confirmation-page .bookit-confirmed-payment-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding: 8px 0;
+}
+
+.bookit-confirmation-page .bookit-confirmed-payment-row + .bookit-confirmed-payment-row {
+  border-top: 1px solid var(--bookit-border);
+}
+
+.bookit-confirmation-page .bookit-confirmed-payment-key {
+  font-size: 0.8125rem;
+  color: var(--bookit-text-secondary);
+}
+
+.bookit-confirmation-page .bookit-confirmed-payment-val {
+  font-size: 0.8125rem;
+  color: var(--bookit-text-primary);
+  font-weight: 500;
+}
+
+.bookit-confirmation-page .bookit-confirmed-payment-row--total .bookit-confirmed-payment-key {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--bookit-text-primary);
+}
+
+.bookit-confirmation-page .bookit-confirmed-payment-row--total .bookit-confirmed-payment-val {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--bookit-text-primary);
+}
+
+.bookit-confirmation-page .bookit-confirmed-balance-note {
+  background: #f7f6f4;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 0.75rem;
+  color: var(--bookit-text-secondary);
+  line-height: 1.5;
+}
+
+.bookit-confirmation-page .bookit-confirmed-pay-on-arrival-msg {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--bookit-text-primary);
+  line-height: 1.5;
+}
+
+/* ── Cancel note ── */
+.bookit-confirmation-page .bookit-confirmed-cancel-note {
+  background: var(--bookit-bg-card);
+  border: 1px solid var(--bookit-border);
+  border-radius: 14px;
+  padding: 12px 1.5rem;
+  font-size: 0.8125rem;
+  color: var(--bookit-text-secondary);
+  text-align: center;
+  line-height: 1.5;
+}
+
+.bookit-confirmation-page .bookit-confirmed-cancel-text,
+.bookit-confirmation-page .bookit-confirmed-cancel-phone {
+  margin: 0;
+}
+
+.bookit-confirmation-page .bookit-confirmed-cancel-phone {
+  margin-top: 0.5rem;
+}
+
+/* Waiver amber — fixed, legal signal, not theme-overridable */
+.bookit-confirmation-page .bookit-confirmed-waiver {
+  background: #fffbf0;
+  border: 1px solid #e6a817;
+  border-radius: 14px;
+  padding: 12px 1.25rem;
+  font-size: 0.8125rem;
+  color: #5c3d06;
+  line-height: 1.5;
+}
+
+.bookit-confirmation-page .bookit-confirmed-special-requests {
+  background: var(--bookit-bg-card);
+  border: 1px solid var(--bookit-border);
+  border-radius: 14px;
+  padding: 1rem 1.25rem;
+}
+
+.bookit-confirmation-page .bookit-confirmed-sr-label {
+  margin: 0 0 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--bookit-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.bookit-confirmation-page .bookit-confirmed-sr-value {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--bookit-text-primary);
+  line-height: 1.5;
+}
+
+/* ── Actions ── */
+.bookit-confirmation-page .bookit-confirmed-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0 0 4px;
+}
+
+.bookit-confirmation-page .bookit-confirmed-btn-primary {
+  width: 100%;
+  background: var(--bookit-primary);
+  color: var(--bookit-text-inverse);
+  border: none;
+  border-radius: 12px;
+  padding: 15px 24px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: -0.01em;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background 0.15s ease;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+.bookit-confirmation-page .bookit-confirmed-btn-primary:hover {
+  background: var(--bookit-primary-hover);
+}
+
+.bookit-confirmation-page .bookit-confirmed-btn-primary svg {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+
+.bookit-confirmation-page .bookit-confirmed-btn-secondary {
+  width: 100%;
+  background: none;
+  color: var(--bookit-primary);
+  border: 1.5px solid var(--bookit-primary);
+  border-radius: 12px;
+  padding: 14px 24px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: -0.01em;
+  font-family: inherit;
+  text-align: center;
+  transition: background 0.15s ease;
+  text-decoration: none;
+  display: block;
+  box-sizing: border-box;
+}
+
+.bookit-confirmation-page .bookit-confirmed-btn-secondary:hover {
+  background: var(--bookit-primary-light);
+}
+
+.bookit-confirmation-page .bookit-confirmed-btn-text {
+  background: none;
+  border: none;
+  color: var(--bookit-text-muted);
+  font-size: 0.8125rem;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: center;
+  padding: 4px;
+  width: 100%;
+  transition: color 0.15s ease;
+  text-decoration: none;
+  display: block;
+  box-sizing: border-box;
+}
+
+.bookit-confirmation-page .bookit-confirmed-btn-text:hover {
+  color: var(--bookit-text-secondary);
+}
+
+.bookit-confirmation-page .bookit-confirmed-btn-text:focus {
+  outline: 2px solid var(--bookit-border-focus);
+  outline-offset: 2px;
+}
+
+.bookit-confirmation-page .bookit-confirmed-btn-primary:focus,
+.bookit-confirmation-page .bookit-confirmed-btn-secondary:focus {
+  outline: 2px solid var(--bookit-border-focus);
+  outline-offset: 2px;
+}
+
+/* Stacked layout on very narrow viewports */
+@media (max-width: 380px) {
+  .bookit-confirmation-page .bookit-confirmed-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+
+  .bookit-confirmation-page .bookit-confirmed-value {
+    text-align: left;
+  }
+}
+
+@media (max-width: 500px) {
+  .bookit-confirmation-page {
+    padding: 1rem 0.75rem 2rem;
+  }
+
+  .bookit-confirmation-page .bookit-confirmed-card-inner {
+    padding: 1.125rem 1rem;
+  }
+
+  .bookit-confirmation-page .bookit-confirmed-cancel-note {
+    padding: 12px 1rem;
+  }
+}

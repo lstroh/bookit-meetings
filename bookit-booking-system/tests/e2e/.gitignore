@@ -1,0 +1,6 @@
+.env.test.local
+.env.test.live
+results/
+playwright-report/
+test-results/
+node_modules/

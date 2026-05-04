@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<phpunit
+    bootstrap="tests/bootstrap.php"
+    backupGlobals="false"
+    colors="true"
+    convertErrorsToExceptions="true"
+    convertNoticesToExceptions="true"
+    convertWarningsToExceptions="true"
+    verbose="true"
+    beStrictAboutOutputDuringTests="false"
+>
+    <testsuites>
+        <testsuite name="Booking System Test Suite">
+            <file>./tests/test-admin-menu.php</file>
+            <file>./tests/test-auth.php</file>
+            <file>./tests/test-database.php</file>
+            <file>./tests/test-logger.php</file>
+            <file>./tests/test-plugin-activation.php</file>
+            <file>./tests/test-session.php</file>
+            <file>./tests/test-session-security.php</file>
+            <file>./tests/test-stripe-config.php</file>
+            <file>./tests/test-stripe-checkout.php</file>
+            <file>./tests/test-stripe-webhook.php</file>
+            <file>./tests/test-idempotency.php</file>
+            <file>./tests/test-customer-data-export.php</file>
+            <file>./tests/test-payment-success.php</file>
+            <file>./tests/test-bulk-booking-actions.php</file>
+            <file>./tests/unit/test-session-manager.php</file>
+            <file>./tests/unit/test-my-packages-shortcode.php</file>
+            <file>./tests/unit/test-booking-wizard-v2.php</file>
+            <file>./tests/unit/test-booking-confirmed-v2.php</file>
+            <file>./tests/unit/test-wizard-api.php</file>
+            <file>./tests/unit/test-stripe-v2-wiring.php</file>
+            <file>./tests/unit/test-stripe-refund-webhook.php</file>
+            <file>./tests/unit/test-ical-endpoint.php</file>
+            <file>./tests/unit/test-magic-link-flows.php</file>
+            <file>./tests/unit/test-wizard-navigation.php</file>
+            <file>./tests/unit/test-service-model.php</file>
+            <file>./tests/unit/test-service-api.php</file>
+            <file>./tests/unit/test-staff-model.php</file>
+            <file>./tests/unit/test-staff-api.php</file>
+            <file>./tests/unit/test-datetime-model.php</file>
+            <file>./tests/unit/test-availability-algorithm.php</file>
+            <file>./tests/unit/test-dashboard-bookings-api.php</file>
+            <file>./tests/unit/test-dashboard-staff-api.php</file>
+            <file>./tests/unit/test-sprint6a-hooks.php</file>
+            <file>./tests/unit/test-sprint6a-migrations.php</file>
+            <file>./tests/unit/test-google-calendar-migrations.php</file>
+            <file>./tests/unit/test-sprint5a-schema-fixes.php</file>
+            <file>./tests/unit/test-bulk-working-hours-api.php</file>
+            <file>./tests/unit/test-profile-api.php</file>
+            <file>./tests/unit/test-settings-email-api.php</file>
+            <file>./tests/unit/test-cancellation-policy-settings.php</file>
+            <file>./tests/unit/test-payment-settings.php</file>
+            <file>./tests/unit/test-google-calendar-settings.php</file>
+            <file>./tests/unit/test-google-calendar-oauth.php</file>
+            <file>./tests/unit/test-google-calendar-admin.php</file>
+            <file>./tests/unit/test-deposit-settings.php</file>
+            <file>./tests/unit/test-reorder-api.php</file>
+            <file>./tests/integration/test-wizard-flow.php</file>
+            <file>./tests/test-pay-on-arrival.php</file>
+            <file>./tests/unit/test-reports-api.php</file>
+            <file>./tests/unit/test-customers-api.php</file>
+            <file>./tests/unit/test-status-log.php</file>
+            <file>./tests/unit/test-time-off-api.php</file>
+            <file>./tests/unit/test-migration-runner.php</file>
+            <file>./tests/unit/test-audit-logger.php</file>
+            <file>./tests/unit/test-error-registry.php</file>
+            <file>./tests/unit/test-reference-generator.php</file>
+            <file>./tests/unit/test-extension-registry.php</file>
+            <file>./tests/unit/test-audit-log-api.php</file>
+            <file>./tests/unit/test-email-queue-api.php</file>
+            <file>./tests/unit/test-setup-guide-api.php</file>
+            <file>./tests/unit/test-cooling-off-waiver.php</file>
+            <file>./tests/unit/test-team-calendar-api.php</file>
+            <file>./tests/unit/test-package-types-api.php</file>
+            <file>./tests/unit/test-customer-packages-api.php</file>
+            <file>./tests/unit/test-available-packages-api.php</file>
+            <file>./tests/unit/test-security-input-validation.php</file>
+            <file>./tests/unit/test-rate-limiter.php</file>
+            <file>./tests/unit/test-use-package-redemption.php</file>
+            <file>./tests/unit/test-package-redemption-api.php</file>
+            <file>./tests/unit/test-package-redemption-history-api.php</file>
+            <file>./tests/unit/test-package-expiry-cron.php</file>
+            <file>./tests/unit/test-package-email.php</file>
+            <file>./tests/unit/test-email-change-workflow.php</file>
+            <file>./tests/unit/test-cancelled-slot-fix.php</file>
+            <file>./tests/unit/test-provider-interfaces.php</file>
+            <file>./tests/unit/test-brevo-email-provider.php</file>
+            <file>./tests/unit/test-notification-queue.php</file>
+            <file>./tests/unit/test-notification-retry.php</file>
+            <file>./tests/unit/test-notification-dispatcher.php</file>
+            <file>./tests/unit/test-notification-settings-api.php</file>
+            <file>./tests/unit/test-staff-notifier.php</file>
+            <file>./tests/unit/test-sprint7-extension-api.php</file>
+            <file>./tests/unit/test-google-calendar-sync.php</file>
+            <file>./tests/unit/test-coverage-gaps.php</file>
+            <file>./tests/unit/test-google-calendar-hook-listeners.php</file>
+            <file>./tests/unit/test-staff-digest-cron.php</file>
+        </testsuite>
+    </testsuites>
+
+    <coverage processUncoveredFiles="true">
+        <include>
+            <directory suffix=".php">./includes/</directory>
+            <directory suffix=".php">./admin/</directory>
+            <directory suffix=".php">./public/</directory>
+        </include>
+        <exclude>
+            <directory>./vendor/</directory>
+            <directory>./tests/</directory>
+        </exclude>
+    </coverage>
+
+    <php>
+        <env name="WP_TESTS_DIR" value="/tmp/wordpress-tests-lib" />
+        <env name="WP_CORE_DIR" value="/var/www/html" />
+        <const name="WP_TESTS_PHPUNIT_POLYFILLS_PATH" value="./vendor/yoast/phpunit-polyfills" />
+    </php>
+</phpunit>

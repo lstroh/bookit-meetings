@@ -1,2 +1,1 @@
-# Core plugin — read-only reference, never committed
-bookit-booking-system/
+# Per-package ignore rules: bookit-meetings/.gitignore, bookit-booking-system/.gitignore

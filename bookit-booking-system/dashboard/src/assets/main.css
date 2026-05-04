@@ -1,0 +1,183 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bookit-primary: #4F46E5;
+  --bookit-primary-50: #f0eeff;
+  --bookit-primary-100: #e0dcff;
+  --bookit-primary-500: #4F46E5;
+  --bookit-primary-600: #463ece;
+  --bookit-primary-700: #3c36af;
+}
+
+@layer base {
+  body {
+    @apply antialiased;
+  }
+
+  /* Focus-visible styles for keyboard navigation */
+  *:focus {
+    outline: none;
+  }
+
+  *:focus-visible {
+    outline: 2px solid #3B82F6;
+    outline-offset: 2px;
+  }
+
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    outline: 2px solid #3B82F6;
+    outline-offset: 0;
+    border-color: #3B82F6;
+  }
+}
+
+@layer components {
+  /* Screen-reader only utility */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+}
+
+@layer utilities {
+  .btn-primary {
+    @apply px-4 py-2.5 text-sm font-medium bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors;
+  }
+
+  .btn-secondary {
+    @apply px-4 py-2.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors;
+  }
+
+  .btn-danger {
+    @apply px-4 py-2.5 text-sm font-medium text-red-700 bg-red-50 border border-red-200 rounded-lg hover:bg-red-100 transition-colors;
+  }
+
+  .btn-text {
+    @apply px-3 py-1.5 text-sm font-medium text-primary-600 hover:text-primary-700 hover:bg-primary-50 rounded-lg transition-colors;
+  }
+}
+
+/* ===================================
+   Smooth Transitions
+   =================================== */
+
+button,
+a,
+input,
+select,
+textarea {
+  transition: all 150ms ease-in-out;
+}
+
+/* ===================================
+   Vue Transitions
+   =================================== */
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 200ms ease-in-out;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.slide-enter-active,
+.slide-leave-active {
+  transition: transform 300ms ease-in-out, opacity 300ms ease-in-out;
+}
+
+.slide-enter-from {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+.slide-leave-to {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+.scale-enter-active,
+.scale-leave-active {
+  transition: transform 200ms ease-in-out, opacity 200ms ease-in-out;
+}
+
+.scale-enter-from,
+.scale-leave-to {
+  transform: scale(0.95);
+  opacity: 0;
+}
+
+.list-enter-active,
+.list-leave-active {
+  transition: all 300ms ease-in-out;
+}
+
+.list-enter-from {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.list-leave-to {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.list-move {
+  transition: transform 300ms ease-in-out;
+}
+
+/* ===================================
+   Loading Animations
+   =================================== */
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* ===================================
+   NProgress loading bar
+   =================================== */
+
+#nprogress .bar {
+  background: #3B82F6 !important;
+  height: 3px !important;
+}
+
+#nprogress .peg {
+  box-shadow: 0 0 10px #3B82F6, 0 0 5px #3B82F6 !important;
+}
+
+/* ===================================
+   Utility
+   =================================== */
+
+html {
+  scroll-behavior: smooth;
+}

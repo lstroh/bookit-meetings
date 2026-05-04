@@ -1,0 +1,17 @@
+{
+  "name": "bookit-e2e",
+  "version": "1.5.1",
+  "private": true,
+  "scripts": {
+    "test:smoke": "cross-env MODE=smoke npx playwright test --grep \"@smoke\"",
+    "test:full": "cross-env MODE=full npx playwright test --grep \"@full\"",
+    "report": "npx playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.44.0",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.4.5",
+    "typescript": "^5.9.2",
+    "@types/node": "^24.0.0"
+  }
+}

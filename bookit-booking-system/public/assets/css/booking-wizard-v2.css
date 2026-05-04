@@ -1,0 +1,1087 @@
+/**
+ * Bookit Wizard V2 Stylesheet
+ *
+ * Customer-facing booking wizard (v2). Component styles are scoped under
+ * `.bookit-v2-wizard-container`. Shared `--bookit-*` tokens apply to confirmation
+ * and magic-link pages that load this file for theming; `--bookit-v2-*` are
+ * wizard-only.
+ *
+ * @package    Bookit_Booking_System
+ * @subpackage Bookit_Booking_System/public/assets/css
+ */
+
+:root {
+  /* Shared customer UI tokens (used by confirmation-v2, my-packages, etc.) */
+  --bookit-primary:          #4F46E5;
+  --bookit-primary-hover:    #4338CA;
+  --bookit-primary-light:    #EEF2FF;
+  --bookit-accent:           #10B981;
+  --bookit-text-primary:     #111827;
+  --bookit-text-secondary:   #6B7280;
+  --bookit-text-muted:       #9CA3AF;
+  --bookit-text-inverse:     #FFFFFF;
+  --bookit-bg-page:          #F9FAFB;
+  --bookit-bg-card:          #FFFFFF;
+  --bookit-bg-input:         #FFFFFF;
+  --bookit-border:           #E5E7EB;
+  --bookit-border-focus:     #4F46E5;
+  --bookit-border-radius:    8px;
+  --bookit-border-radius-sm: 4px;
+  --bookit-shadow-sm:        0 1px 2px rgba(0,0,0,0.05);
+  --bookit-shadow:           0 4px 6px rgba(0,0,0,0.07);
+  --bookit-spacing-xs:       4px;
+  --bookit-spacing-sm:       8px;
+  --bookit-spacing-md:       16px;
+  --bookit-spacing-lg:       24px;
+  --bookit-spacing-xl:       32px;
+  --bookit-font-family:      -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --bookit-font-size-sm:     0.875rem;
+  --bookit-font-size-base:   1rem;
+  --bookit-font-size-lg:     1.125rem;
+  --bookit-font-size-xl:     1.25rem;
+  --bookit-line-height:      1.5;
+  --bookit-btn-primary-bg:   var(--bookit-primary);
+  --bookit-btn-primary-text: var(--bookit-text-inverse);
+  --bookit-btn-radius:       var(--bookit-border-radius);
+  --bookit-color-success:    #10B981;
+  --bookit-color-warning:    #F59E0B;
+  --bookit-color-error:      #EF4444;
+  --bookit-color-info:       #3B82F6;
+  --bookit-step-active-bg:   var(--bookit-primary);
+  --bookit-step-done-bg:     var(--bookit-accent);
+  --bookit-step-inactive-bg: var(--bookit-border);
+}
+
+:root {
+  --bookit-v2-max-width:          680px;
+  --bookit-v2-progress-height:    2.5px;
+  --bookit-v2-avatar-size-grid:   44px;
+  --bookit-v2-avatar-size-list:   36px;
+  --bookit-v2-slot-radius:        10px;
+  --bookit-v2-banner-bg:          #f7f6f4;
+  --bookit-v2-zone-label-size:    10px;
+  --bookit-v2-zone-label-spacing: 0.08em;
+  --bookit-v2-waiver-bg:          #fffbf0;
+  --bookit-v2-waiver-border:      #e6a817;
+  --bookit-v2-waiver-heading:     #92610a;
+  --bookit-v2-waiver-text:        #5c3d06;
+}
+
+/* ==========================================================================
+   Wizard V2 — all rules below scoped to the v2 wizard root
+   ========================================================================== */
+
+.bookit-v2-wizard-container {
+  max-width: var(--bookit-v2-max-width);
+  margin: 0 auto;
+  width: 100%;
+  font-family: var(--bookit-font-family);
+  padding-bottom: 7rem;
+}
+
+/* Progress bar */
+.bookit-v2-wizard-container .bookit-v2-progress-wrap {
+  padding: 1rem 1rem 0;
+  margin-bottom: 1.5rem;
+}
+
+.bookit-v2-wizard-container .bookit-v2-progress {
+  display: flex;
+  gap: 0;
+}
+
+.bookit-v2-wizard-container .bookit-v2-progress > * {
+  flex: 1;
+}
+
+.bookit-v2-wizard-container .bookit-v2-step-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  padding-bottom: 8px;
+}
+
+.bookit-v2-wizard-container .bookit-v2-step-item::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: var(--bookit-v2-progress-height);
+  border-radius: 2px;
+}
+
+.bookit-v2-wizard-container .bookit-v2-step-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-align: center;
+  padding-bottom: 6px;
+}
+
+.bookit-v2-wizard-container .bookit-v2-step-item--active .bookit-v2-step-label {
+  color: var(--bookit-primary);
+  font-weight: 600;
+}
+
+.bookit-v2-wizard-container .bookit-v2-step-item--active::after {
+  background: var(--bookit-primary);
+}
+
+.bookit-v2-wizard-container .bookit-v2-step-item--done .bookit-v2-step-label {
+  color: var(--bookit-text-secondary);
+}
+
+.bookit-v2-wizard-container .bookit-v2-step-item--done::after {
+  background: var(--bookit-primary-light);
+}
+
+.bookit-v2-wizard-container .bookit-v2-step-item--inactive .bookit-v2-step-label {
+  color: var(--bookit-text-muted);
+}
+
+.bookit-v2-wizard-container .bookit-v2-step-item--inactive::after {
+  background: transparent;
+}
+
+/* Confirmation banner */
+.bookit-v2-wizard-container .bookit-v2-confirm-banner {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  background: var(--bookit-v2-banner-bg);
+  border: 1px solid var(--bookit-border);
+  border-radius: var(--bookit-border-radius);
+  padding: 10px 14px;
+  margin-bottom: 1.25rem;
+}
+
+.bookit-v2-wizard-container .bookit-v2-confirm-banner-text {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--bookit-text-primary);
+  line-height: 1.5;
+}
+
+.bookit-v2-wizard-container .bookit-v2-confirm-banner-change {
+  font-size: 12px;
+  color: var(--bookit-text-muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.bookit-v2-wizard-container .bookit-v2-confirm-banner-change:hover {
+  color: var(--bookit-text-secondary);
+}
+
+/* Step heading and subheading */
+.bookit-v2-wizard-container .bookit-v2-step-heading {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--bookit-text-primary);
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  margin-bottom: 4px;
+}
+
+.bookit-v2-wizard-container .bookit-v2-step-subheading {
+  font-size: 14px;
+  color: var(--bookit-text-secondary);
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
+/* Step content padding */
+.bookit-v2-wizard-container .bookit-v2-step-body {
+  padding: 0 1rem 1rem;
+}
+
+/* Category label */
+.bookit-v2-wizard-container .bookit-v2-category-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--bookit-text-muted);
+  margin-bottom: 8px;
+  margin-top: 16px;
+}
+
+.bookit-v2-wizard-container .bookit-v2-category-label:first-child {
+  margin-top: 0;
+}
+
+/* Service cards grid */
+.bookit-v2-wizard-container .bookit-v2-services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 10px;
+}
+
+.bookit-v2-wizard-container .bookit-v2-services-grid--few {
+  grid-template-columns: 1fr;
+}
+
+.bookit-v2-wizard-container .bookit-v2-service-card {
+  background: var(--bookit-bg-card);
+  border: 1.5px solid var(--bookit-border);
+  border-radius: var(--bookit-border-radius);
+  padding: 1rem;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.bookit-v2-wizard-container .bookit-v2-service-card:hover {
+  border-color: #d1d5db;
+}
+
+.bookit-v2-wizard-container .bookit-v2-service-card--selected {
+  border-color: var(--bookit-primary);
+  background: var(--bookit-primary-light);
+}
+
+.bookit-v2-wizard-container .bookit-v2-service-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--bookit-text-primary);
+  margin-bottom: 4px;
+}
+
+.bookit-v2-wizard-container .bookit-v2-service-card--selected .bookit-v2-service-name {
+  color: var(--bookit-primary);
+}
+
+.bookit-v2-wizard-container .bookit-v2-service-duration {
+  font-size: 12px;
+  color: var(--bookit-text-secondary);
+}
+
+/* Staff list layout (1–3 staff) */
+.bookit-v2-wizard-container .bookit-v2-staff-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bookit-v2-wizard-container .bookit-v2-staff-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--bookit-bg-card);
+  border: 1.5px solid var(--bookit-border);
+  border-radius: var(--bookit-border-radius);
+  padding: 12px 14px;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.bookit-v2-wizard-container .bookit-v2-staff-row:hover {
+  border-color: #d1d5db;
+}
+
+.bookit-v2-wizard-container .bookit-v2-staff-row--selected {
+  border-color: var(--bookit-primary);
+  background: var(--bookit-primary-light);
+}
+
+.bookit-v2-wizard-container .bookit-v2-staff-row--unavailable {
+  opacity: 0.5;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* Staff grid layout (4+ staff) */
+.bookit-v2-wizard-container .bookit-v2-staff-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.bookit-v2-wizard-container .bookit-v2-staff-grid .bookit-v2-staff-card:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+}
+
+.bookit-v2-wizard-container .bookit-v2-staff-grid .bookit-v2-any-available {
+  grid-column: 1 / -1;
+}
+
+.bookit-v2-wizard-container .bookit-v2-staff-card {
+  background: var(--bookit-bg-card);
+  border: 1.5px solid var(--bookit-border);
+  border-radius: var(--bookit-border-radius);
+  padding: 1rem;
+  cursor: pointer;
+  text-align: center;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.bookit-v2-wizard-container .bookit-v2-staff-card:hover {
+  border-color: #d1d5db;
+}
+
+.bookit-v2-wizard-container .bookit-v2-staff-card--selected {
+  border-color: var(--bookit-primary);
+  background: var(--bookit-primary-light);
+}
+
+.bookit-v2-wizard-container .bookit-v2-staff-card--unavailable {
+  opacity: 0.5;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* Avatar circle */
+.bookit-v2-wizard-container .bookit-v2-avatar {
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: #ffffff;
+  flex-shrink: 0;
+  font-size: 13px;
+}
+
+.bookit-v2-wizard-container .bookit-v2-staff-row .bookit-v2-avatar {
+  width: var(--bookit-v2-avatar-size-list);
+  height: var(--bookit-v2-avatar-size-list);
+}
+
+.bookit-v2-wizard-container .bookit-v2-staff-card .bookit-v2-avatar {
+  width: var(--bookit-v2-avatar-size-grid);
+  height: var(--bookit-v2-avatar-size-grid);
+  margin: 0 auto 8px;
+}
+
+/* Staff info */
+.bookit-v2-wizard-container .bookit-v2-staff-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.bookit-v2-wizard-container .bookit-v2-staff-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--bookit-text-primary);
+}
+
+.bookit-v2-wizard-container .bookit-v2-staff-row--selected .bookit-v2-staff-name,
+.bookit-v2-wizard-container .bookit-v2-staff-card--selected .bookit-v2-staff-name {
+  color: var(--bookit-primary);
+}
+
+.bookit-v2-wizard-container .bookit-v2-staff-title {
+  font-size: 12px;
+  color: var(--bookit-text-secondary);
+  margin-top: 1px;
+}
+
+.bookit-v2-wizard-container .bookit-v2-staff-price {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--bookit-text-primary);
+  flex-shrink: 0;
+}
+
+.bookit-v2-wizard-container .bookit-v2-staff-bio {
+  font-size: 12px;
+  color: var(--bookit-text-secondary);
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
+/* "Any available" row */
+.bookit-v2-wizard-container .bookit-v2-any-available {
+  background: var(--bookit-v2-banner-bg);
+}
+
+.bookit-v2-wizard-container .bookit-v2-any-available-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--bookit-text-primary);
+}
+
+.bookit-v2-wizard-container .bookit-v2-any-available.bookit-v2-staff-row--selected .bookit-v2-any-available-name {
+  color: var(--bookit-primary);
+}
+
+.bookit-v2-wizard-container .bookit-v2-any-available-sub {
+  font-size: 12px;
+  color: var(--bookit-text-secondary);
+  line-height: 1.4;
+}
+
+/* Calendar */
+.bookit-v2-wizard-container .bookit-v2-calendar {
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+.bookit-v2-wizard-container .bookit-v2-calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.bookit-v2-wizard-container .bookit-v2-calendar-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--bookit-text-primary);
+}
+
+.bookit-v2-wizard-container .bookit-v2-calendar-nav {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 8px;
+  color: var(--bookit-text-secondary);
+  font-size: 16px;
+}
+
+.bookit-v2-wizard-container .bookit-v2-calendar-nav:hover {
+  color: var(--bookit-text-primary);
+}
+
+.bookit-v2-wizard-container .bookit-v2-calendar-nav--hidden {
+  visibility: hidden;
+  pointer-events: none;
+  min-width: 32px;
+  display: inline-block;
+}
+
+.bookit-v2-wizard-container .bookit-v2-calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.bookit-v2-wizard-container .bookit-v2-calendar-dow {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--bookit-text-muted);
+  text-align: center;
+  padding: 4px 0;
+}
+
+.bookit-v2-wizard-container .bookit-v2-day {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 13px;
+  cursor: pointer;
+  min-height: 36px;
+  max-width: 44px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.bookit-v2-wizard-container .bookit-v2-day--available {
+  color: var(--bookit-text-primary);
+  font-weight: 500;
+}
+
+.bookit-v2-wizard-container .bookit-v2-day--available:hover {
+  background: var(--bookit-primary-light);
+}
+
+.bookit-v2-wizard-container .bookit-v2-day--selected {
+  background: var(--bookit-primary);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.bookit-v2-wizard-container .bookit-v2-day--selected:hover {
+  background: var(--bookit-primary);
+  color: #ffffff;
+}
+
+.bookit-v2-wizard-container .bookit-v2-day--disabled {
+  opacity: 0.35;
+  cursor: default;
+  pointer-events: none;
+}
+
+.bookit-v2-wizard-container .bookit-v2-day--other-month {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.bookit-v2-wizard-container .bookit-v2-day--today::after {
+  content: '';
+  position: absolute;
+  bottom: 3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--bookit-primary);
+}
+
+.bookit-v2-wizard-container .bookit-v2-day--today.bookit-v2-day--selected::after {
+  background: #ffffff;
+}
+
+/* Time slot sections */
+.bookit-v2-wizard-container .bookit-v2-time-section {
+  margin-bottom: 1.25rem;
+}
+
+.bookit-v2-wizard-container .bookit-v2-time-section-label {
+  font-size: var(--bookit-v2-zone-label-size);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--bookit-v2-zone-label-spacing);
+  color: var(--bookit-text-muted);
+  margin-bottom: 8px;
+}
+
+.bookit-v2-wizard-container .bookit-v2-slots-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.bookit-v2-wizard-container .bookit-v2-slot {
+  padding: 10px 6px;
+  border-radius: var(--bookit-v2-slot-radius);
+  border: 1.5px solid var(--bookit-border);
+  background: var(--bookit-bg-card);
+  font-size: 13px;
+  font-weight: 500;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+}
+
+.bookit-v2-wizard-container .bookit-v2-slot--available:hover {
+  border-color: var(--bookit-primary);
+  color: var(--bookit-primary);
+}
+
+.bookit-v2-wizard-container .bookit-v2-slot--selected {
+  background: var(--bookit-primary);
+  color: #ffffff;
+  border-color: var(--bookit-primary);
+}
+
+.bookit-v2-wizard-container .bookit-v2-slot--unavailable {
+  opacity: 0.5;
+  cursor: default;
+  pointer-events: none;
+  background: var(--bookit-v2-banner-bg);
+}
+
+/* Form fields */
+.bookit-v2-wizard-container .bookit-v2-form-group {
+  margin-bottom: 1.125rem;
+}
+
+.bookit-v2-wizard-container .bookit-v2-form-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--bookit-text-primary);
+  margin-bottom: 6px;
+}
+
+.bookit-v2-wizard-container .bookit-v2-form-input {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 15px;
+  font-family: inherit;
+  color: var(--bookit-text-primary);
+  background: var(--bookit-bg-input);
+  border: 1.5px solid var(--bookit-border);
+  border-radius: var(--bookit-border-radius);
+  outline: none;
+  transition: border-color 0.15s ease;
+  box-sizing: border-box;
+  appearance: none;
+}
+
+.bookit-v2-wizard-container .bookit-v2-form-input::placeholder {
+  color: var(--bookit-text-muted);
+}
+
+.bookit-v2-wizard-container .bookit-v2-form-input:focus {
+  border-color: var(--bookit-primary);
+}
+
+.bookit-v2-wizard-container .bookit-v2-form-input.bookit-v2-input--error,
+.bookit-v2-wizard-container .bookit-v2-form-input.field-error {
+  border-color: var(--bookit-color-error);
+  background: #fef2f2;
+}
+
+.bookit-v2-wizard-container .bookit-v2-field-error {
+  display: block;
+  font-size: 12px;
+  color: var(--bookit-color-error);
+  margin-top: 5px;
+  line-height: 1.4;
+}
+
+/* Special requests toggle */
+.bookit-v2-wizard-container .bookit-v2-special-requests-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--bookit-primary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 0;
+  margin-bottom: 1.125rem;
+}
+
+.bookit-v2-wizard-container .bookit-v2-special-requests-toggle:hover {
+  text-decoration: underline;
+}
+
+/* Form divider */
+.bookit-v2-wizard-container .bookit-v2-form-divider {
+  height: 1px;
+  background: var(--bookit-border);
+  margin: 1.25rem 0;
+}
+
+/* Checkbox group */
+.bookit-v2-wizard-container .bookit-v2-checkbox-group {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 0.75rem;
+}
+
+.bookit-v2-wizard-container .bookit-v2-checkbox-group input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  margin-top: 1px;
+  accent-color: var(--bookit-primary);
+  cursor: pointer;
+}
+
+.bookit-v2-wizard-container .bookit-v2-checkbox-label {
+  font-size: 14px;
+  color: var(--bookit-text-primary);
+  line-height: 1.4;
+  cursor: pointer;
+}
+
+.bookit-v2-wizard-container .bookit-v2-checkbox-helper {
+  font-size: 12px;
+  color: var(--bookit-text-muted);
+  margin-top: 3px;
+  margin-left: 28px;
+  line-height: 1.4;
+}
+
+/* Waiver block */
+.bookit-v2-wizard-container .bookit-v2-waiver-block {
+  background: var(--bookit-v2-waiver-bg);
+  border: 1px solid #f0d080;
+  border-left: 3.5px solid var(--bookit-v2-waiver-border);
+  border-radius: var(--bookit-border-radius);
+  padding: 1rem 1.125rem;
+  margin-top: 1.125rem;
+}
+
+.bookit-v2-wizard-container .bookit-v2-waiver-heading {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--bookit-v2-waiver-heading);
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+
+.bookit-v2-wizard-container .bookit-v2-waiver-body {
+  font-size: 13px;
+  color: var(--bookit-v2-waiver-text);
+  line-height: 1.55;
+  margin-bottom: 12px;
+}
+
+.bookit-v2-wizard-container .bookit-v2-waiver-block .bookit-v2-checkbox-group input[type="checkbox"] {
+  accent-color: var(--bookit-v2-waiver-border);
+}
+
+.bookit-v2-wizard-container .bookit-v2-waiver-block .bookit-v2-checkbox-label {
+  color: var(--bookit-v2-waiver-text);
+  font-weight: 500;
+}
+
+/* Zone labels (Step 5) */
+.bookit-v2-wizard-container .bookit-v2-zone-label {
+  font-size: var(--bookit-v2-zone-label-size);
+  font-weight: 600;
+  color: var(--bookit-text-muted);
+  letter-spacing: var(--bookit-v2-zone-label-spacing);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+/* Zone A — booking summary */
+.bookit-v2-wizard-container .bookit-v2-zone-a {
+  padding: 1.25rem 1rem;
+  border-bottom: 1px solid var(--bookit-border);
+}
+
+.bookit-v2-wizard-container .bookit-v2-summary-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.bookit-v2-wizard-container .bookit-v2-summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.bookit-v2-wizard-container .bookit-v2-summary-key {
+  font-size: 13px;
+  color: var(--bookit-text-secondary);
+  flex-shrink: 0;
+}
+
+.bookit-v2-wizard-container .bookit-v2-summary-val {
+  font-size: 13px;
+  color: var(--bookit-text-primary);
+  font-weight: 500;
+  text-align: right;
+}
+
+.bookit-v2-wizard-container .bookit-v2-zone-divider {
+  height: 1px;
+  background: var(--bookit-border);
+  margin: 12px 0;
+}
+
+.bookit-v2-wizard-container .bookit-v2-deposit-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 12px;
+}
+
+.bookit-v2-wizard-container .bookit-v2-deposit-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.bookit-v2-wizard-container .bookit-v2-deposit-key {
+  font-size: 13px;
+  color: var(--bookit-text-secondary);
+}
+
+.bookit-v2-wizard-container .bookit-v2-deposit-val {
+  font-size: 13px;
+  color: var(--bookit-text-primary);
+  font-weight: 500;
+}
+
+.bookit-v2-wizard-container .bookit-v2-deposit-row--total .bookit-v2-deposit-key {
+  font-weight: 600;
+  color: var(--bookit-text-primary);
+  font-size: 14px;
+}
+
+.bookit-v2-wizard-container .bookit-v2-deposit-row--total .bookit-v2-deposit-val {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+/* Cancellation policy notice block */
+/* Fixed blue-grey values — informational signal, not theme token */
+.bookit-v2-wizard-container .bookit-v2-policy-notice {
+  background: #f0f4f8;
+  border-left: 3.5px solid #5b7fa6;
+  border-radius: var(--bookit-border-radius);
+  padding: 0.875rem 1rem;
+  margin-top: 12px;
+}
+
+.bookit-v2-wizard-container .bookit-v2-policy-notice__summary {
+  font-size: 13px;
+  color: #3d5a73;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.bookit-v2-wizard-container .bookit-v2-policy-expand-btn {
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 12px;
+  color: #5b7fa6;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 4px;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.bookit-v2-wizard-container .bookit-v2-policy-expand-btn:hover {
+  color: #3d5a73;
+}
+
+.bookit-v2-wizard-container .bookit-v2-policy-notice__full {
+  font-size: 13px;
+  color: #3d5a73;
+  line-height: 1.55;
+  margin: 8px 0 0;
+}
+
+/* Zone B — packages */
+.bookit-v2-wizard-container .bookit-v2-zone-b {
+  padding: 1.25rem 1rem;
+  border-bottom: 1px solid var(--bookit-border);
+}
+
+.bookit-v2-wizard-container .bookit-v2-zone-b--use-package {
+  background: var(--bookit-primary-light);
+}
+
+.bookit-v2-wizard-container .bookit-v2-zone-b--buy-package {
+  background: #fafaf9;
+}
+
+.bookit-v2-wizard-container .bookit-v2-zone-b-intro {
+  font-size: 13px;
+  color: var(--bookit-text-secondary);
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+/* Zone C — payment rows */
+.bookit-v2-wizard-container .bookit-v2-zone-c {
+  padding: 1.25rem 1rem;
+}
+
+.bookit-v2-wizard-container .bookit-v2-payment-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bookit-v2-wizard-container .bookit-v2-payment-row,
+.bookit-v2-wizard-container .bookit-v2-package-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--bookit-bg-card);
+  border: 1.5px solid var(--bookit-border);
+  border-radius: var(--bookit-border-radius);
+  padding: 14px;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.bookit-v2-wizard-container .bookit-v2-payment-row:hover,
+.bookit-v2-wizard-container .bookit-v2-package-row:hover {
+  border-color: #d1d5db;
+}
+
+.bookit-v2-wizard-container .bookit-v2-payment-row--selected,
+.bookit-v2-wizard-container .bookit-v2-package-row--selected {
+  border-color: var(--bookit-primary);
+  background: var(--bookit-primary-light);
+}
+
+.bookit-v2-wizard-container .bookit-v2-payment-row--disabled {
+  opacity: 0.4;
+}
+
+.bookit-v2-wizard-container .bookit-v2-payment-row input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  accent-color: var(--bookit-primary);
+  cursor: pointer;
+}
+
+.bookit-v2-wizard-container .bookit-v2-package-row input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  accent-color: var(--bookit-primary);
+  cursor: pointer;
+}
+
+.bookit-v2-wizard-container .bookit-v2-payment-label-group {
+  flex: 1;
+}
+
+.bookit-v2-wizard-container .bookit-v2-payment-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--bookit-text-primary);
+  line-height: 1.3;
+}
+
+.bookit-v2-wizard-container .bookit-v2-payment-row--selected .bookit-v2-payment-label {
+  color: var(--bookit-primary);
+}
+
+.bookit-v2-wizard-container .bookit-v2-payment-sub {
+  font-size: 12px;
+  color: var(--bookit-text-secondary);
+  margin-top: 2px;
+}
+
+.bookit-v2-wizard-container .bookit-v2-payment-logos {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.bookit-v2-wizard-container .bookit-v2-logo-pill {
+  font-size: 9px;
+  font-weight: 700;
+  padding: 3px 6px;
+  border-radius: 4px;
+  letter-spacing: 0.04em;
+  color: #ffffff;
+}
+
+.bookit-v2-wizard-container .bookit-v2-logo-pill--visa {
+  background: #1a1f71;
+}
+
+.bookit-v2-wizard-container .bookit-v2-logo-pill--mc {
+  background: #eb001b;
+}
+
+.bookit-v2-wizard-container .bookit-v2-logo-pill--paypal {
+  background: #003087;
+}
+
+/* Package radio rows (Zone B) */
+.bookit-v2-wizard-container .bookit-v2-package-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--bookit-text-primary);
+}
+
+.bookit-v2-wizard-container .bookit-v2-package-meta {
+  font-size: 12px;
+  color: var(--bookit-text-secondary);
+  margin-top: 2px;
+}
+
+.bookit-v2-wizard-container .bookit-v2-package-saving {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--bookit-primary);
+}
+
+.bookit-v2-wizard-container .bookit-v2-package-price {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--bookit-text-primary);
+  flex-shrink: 0;
+}
+
+/* Sticky footer */
+.bookit-v2-wizard-container .bookit-v2-sticky-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-top: 1px solid var(--bookit-border);
+  padding: 1rem;
+  z-index: 100;
+}
+
+.bookit-v2-wizard-container .bookit-v2-footer-inner {
+  max-width: var(--bookit-v2-max-width);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.bookit-v2-wizard-container .bookit-v2-cta-btn {
+  width: 100%;
+  background: var(--bookit-btn-primary-bg);
+  color: var(--bookit-btn-primary-text);
+  border: none;
+  border-radius: var(--bookit-btn-radius);
+  padding: 15px 24px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s ease;
+}
+
+.bookit-v2-wizard-container .bookit-v2-cta-btn:hover:not(:disabled) {
+  background: var(--bookit-primary-hover);
+}
+
+.bookit-v2-wizard-container .bookit-v2-cta-btn:disabled {
+  background: var(--bookit-border);
+  color: var(--bookit-text-muted);
+  cursor: not-allowed;
+}
+
+.bookit-v2-wizard-container .bookit-v2-btn-back {
+  background: none;
+  border: none;
+  color: var(--bookit-text-secondary);
+  font-size: 13px;
+  cursor: pointer;
+  padding: 2px;
+  text-align: center;
+  font-family: inherit;
+}
+
+.bookit-v2-wizard-container .bookit-v2-btn-back--disabled {
+  opacity: 0.4;
+  cursor: default;
+  pointer-events: none;
+}
+
+@media (max-width: 500px) {
+  .bookit-v2-wizard-container .bookit-v2-step-label {
+    font-size: 10px;
+  }
+
+  .bookit-v2-wizard-container .bookit-v2-progress-wrap {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+
+  .bookit-v2-wizard-container .bookit-v2-step-body {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+
+  .bookit-v2-wizard-container .bookit-v2-zone-a,
+  .bookit-v2-wizard-container .bookit-v2-zone-b,
+  .bookit-v2-wizard-container .bookit-v2-zone-c {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+}
