@@ -40,6 +40,16 @@ class Bookit_Meetings_Loader {
 		require_once BOOKIT_MEETINGS_PLUGIN_DIR . 'includes/class-bookit-meetings-assets.php';
 		$assets = new Bookit_Meetings_Assets();
 		add_action( 'bookit_dashboard_loaded', array( $assets, 'enqueue_dashboard_assets' ) );
+		add_action(
+			'bookit_dashboard_extension_content',
+			static function (): void {
+				$uri = $_SERVER['REQUEST_URI'] ?? '';
+				if ( strpos( $uri, '/bookit-dashboard/app/meetings' ) === false ) {
+					return;
+				}
+				echo '<div id="bookit-meetings-app"></div>';
+			}
+		);
 		add_filter( 'bookit_dashboard_js_data', array( $assets, 'add_dashboard_js_data' ) );
 		add_filter( 'bookit_booking_response', array( $assets, 'add_meeting_link_to_booking_response' ), 10, 2 );
 

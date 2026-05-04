@@ -71,7 +71,6 @@ class Bookit_Meetings_Assets {
 
 				$inject  = '<script>window.bookitMeetings = ' . $json . ';</script>' . "\n";
 				$inject .= '<script type="module" src="' . esc_url( $js_url ) . '"></script>' . "\n";
-				$inject .= '<div id="bookit-meetings-app"></div>' . "\n";
 
 				return str_replace( '</body>', $inject . '</body>', $html );
 			}
