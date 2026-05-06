@@ -181,7 +181,7 @@ onUnmounted( () => {
 				</div>
 
 				<div class="bm-actions">
-					<button type="button" class="bm-button" :disabled="saving" @click="save">
+					<button type="button" class="btn-primary" :disabled="saving" @click="save">
 						{{ saving ? 'Saving…' : 'Save' }}
 					</button>
 				</div>
@@ -231,21 +231,6 @@ onUnmounted( () => {
 .bm-actions {
 	display: flex;
 	justify-content: flex-end;
-}
-
-.bm-button {
-	background: var(--bookit-color-primary);
-	border: 1px solid var(--bookit-color-primary);
-	color: var(--bookit-text-primary);
-	border-radius: 12px;
-	padding: 10px 16px;
-	cursor: pointer;
-	transition: opacity 150ms ease;
-}
-
-.bm-button:disabled {
-	opacity: 0.6;
-	cursor: not-allowed;
 }
 
 .bm-status {

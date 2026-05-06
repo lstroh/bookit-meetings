@@ -31,7 +31,6 @@ function select( option ) {
 					<div class="bm-platform__label">{{ opt.label }}</div>
 					<span v-if="opt.comingSoon" class="bm-platform__badge">Coming Soon</span>
 				</div>
-				<div class="bm-platform__value">{{ opt.value }}</div>
 			</button>
 		</div>
 	</div>
@@ -80,12 +79,6 @@ function select( option ) {
 
 .bm-platform__label {
 	font-weight: 600;
-}
-
-.bm-platform__value {
-	margin-top: 6px;
-	color: var(--bookit-text-secondary);
-	font-size: 12px;
 }
 
 .bm-platform__badge {
