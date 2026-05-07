@@ -21,7 +21,7 @@ class Bookit_Meetings_Loader {
 			bookit_register_nav_item(
 				array(
 					'label'      => 'Meetings',
-					'route'      => '/bookit-dashboard/app/meetings',
+					'route'      => '/bookit-dashboard/app/meetings#/meetings',
 					'icon'       => 'video',
 					'position'   => 60,
 					'capability' => 'bookit_manage_all',
