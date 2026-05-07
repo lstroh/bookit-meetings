@@ -6,6 +6,10 @@ const router = createRouter( {
 	routes: [
 		{
 			path: '/',
+			component: { template: '<div />' },
+		},
+		{
+			path: '/meetings',
 			component: SettingsView,
 		},
 		{

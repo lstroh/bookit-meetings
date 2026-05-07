@@ -47,7 +47,7 @@ async function loadMeetingInfo( bookingId ) {
 		}
 		const json = await res.json()
 		// Core APIs sometimes wrap in { data: ... }.
-		booking.value = json?.data ?? json
+		booking.value = json?.booking ?? json?.data ?? json
 	} catch {
 		booking.value = null
 	} finally {
