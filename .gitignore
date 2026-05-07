@@ -1,1 +1,2 @@
 # Per-package ignore rules: bookit-meetings/.gitignore, bookit-booking-system/.gitignore
+bookit-meetings/.phpunit.result.cache

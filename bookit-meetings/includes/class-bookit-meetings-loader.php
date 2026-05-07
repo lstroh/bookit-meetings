@@ -44,7 +44,7 @@ class Bookit_Meetings_Loader {
 			'bookit_dashboard_extension_content',
 			static function (): void {
 				$uri = $_SERVER['REQUEST_URI'] ?? '';
-				if ( strpos( $uri, '/bookit-dashboard/app/meetings' ) === false ) {
+				if ( strpos( $uri, '/bookit-dashboard/' ) === false ) {
 					return;
 				}
 				echo '<div id="bookit-meetings-app"></div>';

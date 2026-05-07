@@ -59,7 +59,10 @@ function patchFetchOnce() {
 	if ( typeof window.fetch !== 'function' ) return
 	if ( originalFetch ) return
 
-	originalFetch = window.fetch.bind( window )
+	// Store original — handle case where fetch may already be patched by another script
+	const nativeFetch = window.__bookitOriginalFetch ?? window.fetch.bind( window )
+	window.__bookitOriginalFetch = nativeFetch
+	originalFetch = nativeFetch
 
 	window.fetch = async ( ...args ) => {
 		try {
@@ -105,6 +108,7 @@ onUnmounted( () => {
 		window.fetch = originalFetch
 		originalFetch = null
 	}
+	delete window.__bookitOriginalFetch
 	if ( observer ) {
 		observer.disconnect()
 		observer = null

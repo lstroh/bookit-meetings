@@ -5,8 +5,8 @@ import BookingDetailView from './views/BookingDetailView.vue'
 
 <template>
   <div class="bm-app">
-    <RouterView />
     <BookingDetailView />
+    <RouterView />
   </div>
 </template>
 
