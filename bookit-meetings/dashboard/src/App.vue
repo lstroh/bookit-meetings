@@ -1,12 +1,17 @@
 <script setup>
-import { RouterView } from 'vue-router'
+import { computed } from 'vue'
 import BookingDetailView from './views/BookingDetailView.vue'
+import SettingsView from './views/SettingsView.vue'
+
+const isMeetingsPage = computed( () =>
+    window.location.pathname.includes( '/bookit-dashboard/app/meetings' )
+)
 </script>
 
 <template>
   <div class="bm-app">
     <BookingDetailView />
-    <RouterView />
+    <SettingsView v-if="isMeetingsPage" />
   </div>
 </template>
 
