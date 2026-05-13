@@ -1,10 +1,12 @@
-<script setup>
 import { computed, onMounted, onUnmounted, ref } from 'vue'
 import MeetingInfoPanel from '../components/MeetingInfoPanel.vue'
 
-const activeBookingId = ref( null )
-const loading = ref( false )
-const booking = ref( null )
+// Module-level state — persists across component remounts
+const activeBookingId = ref(null)
+const loading = ref(false)
+const booking = ref(null)
+
+<script setup>
 
 const meetingsEnabled = computed( () => Boolean( window?.bookitMeetings?.meetings_enabled ) )
 const meetingsPlatform = computed( () => String( window?.bookitMeetings?.meetings_platform ?? '' ) )
