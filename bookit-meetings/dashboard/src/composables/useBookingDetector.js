@@ -13,9 +13,11 @@ function getDialogPresent() {
 }
 
 async function loadMeetingInfo(bookingId) {
+    console.log('[bookit] loadMeetingInfo called:', bookingId)
     if (!Number.isInteger(bookingId) || bookingId <= 0) return
     const enabled = Boolean(window?.bookitMeetings?.meetings_enabled)
     const platform = String(window?.bookitMeetings?.meetings_platform ?? '')
+    console.log('[bookit] enabled:', enabled, 'platform:', platform)
     if (!enabled || !['whatsapp', 'teams', 'generic'].includes(platform)) return
 
     loading.value = true
@@ -49,9 +51,11 @@ function patchFetchOnce() {
             const raw = args?.[0]
             const url = typeof raw === 'string' ? raw : (raw?.url ?? '')
             const match = String(url).match(/\/dashboard\/bookings\/(\d+)$/)
+            console.log('[bookit] fetch intercepted:', url, 'match:', match)
             if (match) {
                 const id = parseInt(match[1], 10)
                 if (Number.isInteger(id) && id > 0) {
+                    console.log('[bookit] setting activeBookingId:', id)
                     activeBookingId.value = id
                     await loadMeetingInfo(id)
                 }
@@ -79,11 +83,8 @@ function stopModalObserver() {
 }
 
 function unpatchFetch() {
-    if (originalFetch) {
-        window.fetch = originalFetch
-        originalFetch = null
-    }
-    delete window.__bookitOriginalFetch
+    // Intentionally empty — fetch intercept must persist across client-side
+    // navigation. Full page reloads reset window.fetch naturally.
 }
 
 export function useBookingDetector() {

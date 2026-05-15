@@ -25,11 +25,13 @@ const shouldRender = computed(() =>
 )
 
 onMounted(() => {
+    console.log('BookingDetailView MOUNTED')
     patchFetchOnce()
     startModalObserver()
 })
 
 onUnmounted(() => {
+    console.warn('BookingDetailView UNMOUNTED — stack:', new Error().stack)
     unpatchFetch()
     stopModalObserver()
 })
