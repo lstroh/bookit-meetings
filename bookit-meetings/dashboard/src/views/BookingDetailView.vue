@@ -25,7 +25,7 @@ const shouldRender = computed(() =>
 )
 
 onMounted(() => {
-    console.log('BookingDetailView MOUNTED')
+    console.log('BookingDetailView MOUNTED on:', window.location.pathname, window.location.hash)
     patchFetchOnce()
     startModalObserver()
 })
