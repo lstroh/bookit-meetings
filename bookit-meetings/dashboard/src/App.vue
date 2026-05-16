@@ -41,7 +41,6 @@ onUnmounted(() => {
 
 <style scoped>
 .bm-app {
-  padding: 24px;
   color: var(--bookit-text-primary);
 }
 </style>
@@ -61,6 +60,13 @@ onUnmounted(() => {
 
   /* Primary — map to core's already-defined variable */
   --bookit-color-primary: var(--bookit-primary);
+}
+
+/* Align with core main content (lg:ml-64); mount is outside #app so it lacks that offset */
+@media (min-width: 1024px) {
+  #bookit-meetings-app {
+    margin-left: 16rem;
+  }
 }
 </style>
 
